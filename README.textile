@@ -2,7 +2,7 @@ h1. Textile Helpers
 
 This Rails plugin provides some view helpers that enhance Textile support.
 
-h1. Installation
+h2. Installation
 
   script/plugin install git@github.com:zeke/textile_helpers.git
 
