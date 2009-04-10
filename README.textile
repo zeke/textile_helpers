@@ -20,10 +20,9 @@ The @textilize_plus@ helper method works just like Rails' "textilize":http://api
 
   textilize_plus(my_string)
 
-The @table_of_contents_for@ helper method is mean to be paired with textilize_plus. It parses your textilizable string and generate a hierarchical table of countents base on the h1, h2, and h3 headings.
+The @table_of_contents_for@ helper method is meant to be paired with textilize_plus. It parses your textilizable string and generate a hierarchical table of countents base on the h1, h2, and h3 headings.
 
-<code>
-<pre>
+<code><pre>
     <div id="main">
       <%= textilize_plus(my_string) %>
     </div>
@@ -31,8 +30,7 @@ The @table_of_contents_for@ helper method is mean to be paired with textilize_pl
     <div id="sidebar">
       <%= table_of_contents_for(my_string) %>
     </div>
-  </pre>
-</code>
+</pre></code>
 
 See lib/textile_helpers.rb for more details.
 
