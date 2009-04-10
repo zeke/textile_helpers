@@ -1,0 +1,39 @@
+h1. Textile Helpers
+
+This Rails plugin provides some view helpers that enhance Textile support.
+
+h1. Installation
+
+  script/plugin install git@github.com:zeke/textile_helpers.git
+
+As of Rails 2.3, You may also need to install the RedCloth gem..
+
+  sudo gem install redcloth
+
+..and add this to environment.rb
+
+  config.gem "RedCloth"
+
+h2. Overview and Usage
+
+The @textilize_plus@ helper method works just like Rails' "textilize":http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html#M001716 method, but with a few goodies added. It cleans up MS Word characters; repairs (some) faulty markup, such as heading tags (h1, h2, etc) not having a newline underneath them;  adds an id attribute to headings based on the content of the heading.
+
+  textilize_plus(my_string)
+
+The @table_of_contents_for@ helper method is mean to be paired with textilize_plus. It parses your textilizable string and generate a hierarchical table of countents base on the h1, h2, and h3 headings.
+
+<code>
+<pre>
+    <div id="main">
+      <%= textilize_plus(my_string) %>
+    </div>
+  
+    <div id="sidebar">
+      <%= table_of_contents_for(my_string) %>
+    </div>
+  </pre>
+</code>
+
+See lib/textile_helpers.rb for more details.
+
+Copyright (c) 2009 Zeke Sikelianos, released under the MIT license

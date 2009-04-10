@@ -1,0 +1,11 @@
+This is my string
+
+h1. Head 123? Dada
+That was a bad h1 tag.
+
+h2. Another
+!Whoa nelly This is a bad h1 tag.
+
+h1. Good One!
+
+Good H1 Tag above
