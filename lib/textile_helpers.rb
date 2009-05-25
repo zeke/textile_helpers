@@ -13,13 +13,17 @@ module TextileHelpers
       options[:repair_markup] = true if options[:repair_markup].nil?
       options[:heading_ids] = true if options[:heading_ids].nil?
       options[:wrap_in_div] = true if options[:wrap_in_div].nil?
+
+      # Add 'textilized' class to any existing CSS styles
+      options[:class] = "" if options[:class].nil?
+      options[:class] = options[:class].split(" ").push("textilized").join(" ")
     
       # Clean up string
       string = replace_wonky_characters_with_ascii(string) if options[:replace_wonky]
       string = repair_faulty_textile_heading_markup(string) if options[:repair_markup]
       string = add_id_attribute_to_textile_headings(string) if options[:heading_ids]
       string = options[:paragraph] ? textilize(string) : textilize_without_paragraph(string)
-      return content_tag(:div, string, :class => "textilized") if options[:wrap_in_div]
+      return content_tag(:div, string, :class => options[:class]) if options[:wrap_in_div]
       string
     end
 
