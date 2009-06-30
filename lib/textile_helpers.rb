@@ -91,47 +91,14 @@ module TextileHelpers
     end
 
     def replace_wonky_characters_with_ascii string
-      o = string.to_s
-      o.gsub!(/&#8211;/, '-')      # en-dash
-      o.gsub!(/&#8212;/, '--')     # em-dash
-      o.gsub!(/&#8230;/, '...')     # ellipsis    
-      o.gsub!(/&#8216;/, "'")      # open single quote
-      o.gsub!(/&#8217;/, "'")      # close single quote
-      o.gsub!(/&#8220;/, '"')      # open double quote
-      o.gsub!(/&#8221;/, '"')      # close double quote
-      
-      o.gsub!("\342\200\042", "-")    # en-dash
-      o.gsub!("\342\200\041", "--")   # em-dash
-      o.gsub!("\342\200\174", "...")  # ellipsis
-      o.gsub!("\342\200\176", "'")    # single quote
-      o.gsub!("\342\200\177", "'")    # single quote
-      o.gsub!("\342\200\230", "'")    # single quote
-      o.gsub!("\342\200\231", "'")    # single quote
-      o.gsub!("\342\200\234", "\"")   # Double quote, right
-      o.gsub!("\342\200\235", "\"")   # Double quote, left
-      o.gsub!("\342\200\242", ".")
-      o.gsub!("\342\202\254", "&euro;");   # Euro symbol
-      o.gsub!(/\S\200\S/, " ")             # every other strange character send to the moon
-      o.gsub!("\176", "\'")  # single quote
-      o.gsub!("\177", "\'")  # single quote
-      o.gsub!("\205", "-")		# ISO-Latin1 horizontal elipses (0x85)
-      o.gsub!("\221", "\'")	# ISO-Latin1 left single-quote
-      o.gsub!("\222", "\'")	# ISO-Latin1 right single-quote
-      o.gsub!("\223", "\"")	# ISO-Latin1 left double-quote
-      o.gsub!("\224", "\"")	# ISO-Latin1 right double-quote
-      o.gsub!("\225", "\*")	# ISO-Latin1 bullet
-      o.gsub!("\226", "-")		# ISO-Latin1 en-dash (0x96)
-      o.gsub!("\227", "-")		# ISO-Latin1 em-dash (0x97)
-      o.gsub!("\230", "\'")  # single quote
-      o.gsub!("\231", "\'")  # single quote
-      o.gsub!("\233", ">")		# ISO-Latin1 single right angle quote
-      o.gsub!("\234", "\"")  # Double quote
-      o.gsub!("\235", "\"")  # Double quote
-      o.gsub!("\240", " ")		# ISO-Latin1 nonbreaking space
-      o.gsub!("\246", "\|")	# ISO-Latin1 broken vertical bar
-      o.gsub!("\255", "")	  # ISO-Latin1 soft hyphen (0xAD)
-      o.gsub!("\264", "\'")	# ISO-Latin1 spacing acute
-      o.gsub!("\267", "\*")	# ISO-Latin1 middle dot (0xB7)
+      o = string.dup
+      o.gsub!('—', '-')
+      o.gsub!('–', '--')
+      o.gsub!('…', '...')
+      o.gsub!('’', "'")
+      o.gsub!('‘', "'")
+      o.gsub!('“', '"')
+      o.gsub!('”', '"')
       o
     end
     

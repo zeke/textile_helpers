@@ -50,8 +50,9 @@ describe TextileHelpers do
   context "replace_wonky_characters_with_ascii" do
     it "handles smart quotes" do
       replace_wonky_characters_with_ascii("\“Ulysses\”").should == "\"Ulysses\""
+      replace_wonky_characters_with_ascii("And then…").should == "And then..."
       replace_wonky_characters_with_ascii("We ‘are’ single").should == "We 'are' single"
-      replace_wonky_characters_with_ascii("We ‘are’ single").should == "We 'are' single"
+      replace_wonky_characters_with_ascii("We “are” double").should == "We \"are\" double"
     end
   end
   
