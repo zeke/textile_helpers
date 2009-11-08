@@ -23,6 +23,20 @@ describe TextileHelpers do
     it "returns textilized text without paragraph tag" do
       textilize_plus("*no* paragraph", :paragraph => false, :wrap_in_div => false).should == "<strong>no</strong> paragraph"
     end
+    
+    it "protects 501(c)3 from getting converted to copyright symbol" do
+      textilize_plus("we are a 501(c)3 organization", :paragraph => false, :wrap_in_div => false).should == "we are a 501(c)(3) organization"
+    end
+  end
+  
+  context "protect_501c3" do
+    it "handles various incarnations of 501c3" do
+      protect_501c3('501c3').should == "==501(c)(3)=="
+      protect_501c3('501C3').should == "==501(c)(3)=="
+      protect_501c3('501(c)(3)').should == "==501(c)(3)=="
+      protect_501c3('501(c)3').should == "==501(c)(3)=="
+      protect_501c3('501c(3)').should == "==501(c)(3)=="
+    end
   end
   
   context "add_id_attribute_to_textile_headings" do

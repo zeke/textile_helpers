@@ -19,12 +19,17 @@ module TextileHelpers
       options[:class] = options[:class].split(" ").push("textilized").join(" ")
     
       # Clean up string
+      string = protect_501c3(string)
       string = replace_wonky_characters_with_ascii(string) if options[:replace_wonky]
       string = repair_faulty_textile_heading_markup(string) if options[:repair_markup]
       string = add_id_attribute_to_textile_headings(string) if options[:heading_ids]
       string = options[:paragraph] ? textilize(string) : textilize_without_paragraph(string)
       return content_tag(:div, string, :class => options[:class]) if options[:wrap_in_div]
       string
+    end
+    
+    def protect_501c3 string
+      string.gsub(/501\(?c\)?\(?3\)?/i, '==501(c)(3)==')
     end
 
     # Replaces all h1, h2, and h3 headings with name attributes
@@ -55,11 +60,17 @@ module TextileHelpers
       output.scan(/^h\d+. .*$/i).map { |h| output.gsub!(h, h+"\n") } # Add a newline after all headings
       output.gsub("\n\n\n", "\n\n")  # Replace instances of 3 newlines with 2
     end
+    
+    def repair_faulty_textile_heading_markup string
+      output = string.to_s
+      output.gsub!("\r\n", "\n") # Replace carriage returns with regular newlines
+      output.scan(/^h\d+. .*$/i).map { |h| output.gsub!(h, h+"\n") } # Add a newline after all headings
+      output.gsub("\n\n\n", "\n\n")  # Replace instances of 3 newlines with 2
+    end
   
     def table_of_contents_for string, options={}
       # Handle bad arguments
-      return if string.blank?
-      return unless string.is_a? String
+      return unless string.is_a?(String) && !string.blank?
       
       # Handle options
       options[:heading] ||= "Table of Contents"
